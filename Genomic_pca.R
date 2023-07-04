@@ -112,8 +112,54 @@ eigenvalues<-eigen(cormatrix)$values
 # calculate standardised loadings
 loadings<-as.vector(eigenvectors%*%sqrt(diag(eigenvalues))[,1])
 
+# multiply the loadings with -1 if the median value of the loadings is below 0
+# this achieves a more intuitive interpretation but doesn't change the results - the signal is the same even when we multiple it with -1
+median_loadings<-median(loadings)
+mean_direction<-sign(median_loadings)
+if(mean_direction == -1){
+loadings<-loadings*(-1)
+} else {
+loadings<-loadings}
+
 
 # run modified GWAMA function
 my_GWAMA(x=dat,cov_Z=CTI,h2=loadings,
           out=".",name="GenomicPCA_Correlation",
           output_gz=F,check_columns=F)
+
+
+
+
+############# -------------------------Covariants based analysis--------------------------------------------------------------------------------------------------------
+# load covariance matrix from LDSC
+load("genomicPCA_LDSC.RData")
+order<-names(dat)
+
+# load correlation matrix
+dimnames(LDSCoutput_risk_taking$S)[[1]]<-dimnames(LDSCoutput_risk_taking$S)[[2]]
+covmatrix<-LDSCoutput_risk_taking$S[order,order]
+
+# eigen decomposition
+eigenvectors<-eigen(covmatrix)$vectors
+eigenvalues<-eigen(covmatrix)$values
+
+# calculate standardised loadings
+loadings<-as.vector(eigenvectors%*%sqrt(diag(eigenvalues))[,1])
+
+# multiply the loadings with -1 if the median value of the loadings is below 0
+# this achieves a more intuitive interpretation but doesn't change the results - the signal is the same even when we multiple it with -1
+median_loadings<-median(loadings)
+mean_direction<-sign(median_loadings)
+if(mean_direction == -1){
+loadings<-loadings*(-1)
+} else {
+loadings<-loadings}
+
+# run my modified GWAMA function
+my_GWAMA(x=dat,
+          cov_Z=CTI,
+          h2=loadings,
+          out=".",
+          name="GenomicPCA_covariates",
+          output_gz=F,
+          check_columns=F)
