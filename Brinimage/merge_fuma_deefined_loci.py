@@ -14,7 +14,6 @@ fumafile="*"+fumafile
 files=glob.glob(fumafile)
 
 
-fumafile="GenomicRiskLoci.txt"
 
 MainDf_list=list()
 MainDf=pd.DataFrame()
