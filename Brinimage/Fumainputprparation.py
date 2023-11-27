@@ -10,7 +10,7 @@ info["BP"]=info["BP"].astype("int")
 info["CHR"]=info["CHR"].astype("str")
 
 
-file="dbscan_clust_10_GenomicPCA_Correlation.N_weighted_GWAMA.results.txt.gz"
+file="dbscan_clust_1_GenomicPCA_Correlation.N_weighted_GWAMA.results.txt.gz"
 
 df=pd.read_csv(file,sep="\t")
 df["BP"]=df["BP"].astype("int")
