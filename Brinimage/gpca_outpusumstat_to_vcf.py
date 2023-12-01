@@ -38,7 +38,9 @@ info["CHR"]=info["CHR"].astype("str")
 info=info[["CHR","BP","EA","OA","SNPID","info"]]
 
 
+
 for filename in filenames:
+    print(f"{filename} started running")
     out_preefix=f'{filename[:-7]}'
     ID=out_preefix.replace(".N_weighted_GWAMA.results","")
     ID=ID.replace("dbscan_clust","Cluster").replace("GenomicPCA_Correlation","GPCA_CORR")
@@ -51,13 +53,8 @@ for filename in filenames:
     fdf3[['EAF', 'BETA','SE','PVAL']]=fdf3[['EAF', 'BETA','SE','PVAL']].astype("float")
     fdf3["CHR"]=fdf3["CHR"].str.replace("23","X")
     fdf3['SNPID']=fdf3["CHR"]+"_"+fdf3["BP"].astype("str")+"_"+fdf3["EA"]+"_"+fdf3["OA"]
-
     fdf3=pd.merge(fdf3,info,on=['CHR', 'BP', 'EA', 'OA', 'SNPID'])
     fdf3.to_csv(f'{out_preefix}.tsv',sep="\t",index=None)
-    
-    ## CrossMap.py vcf GRCh38_to_GRCh37.chain.gz dbsnp_nochr.v153.hg38.vcf.gz Homo_sapiens.GRCh37.dna.primary_assembly.fa dbsnp_nochr.v153.hg37.vcf
-    ## bgzip dbsnp_nochr.v153.hg37.vcf
-    ## tabix -p vcf dbsnp_nochr.v153.hg37.vcf.gz
     
     paramsdict={"chr_col": 0,
         "pos_col": 1,
@@ -80,7 +77,7 @@ for filename in filenames:
     
     ##Convert to vcf format 
     path=os.getcwd()
-    
+    print(f"{filename} started vcf cration")
     os.system(f'''python /edgehpc/dept/human_genetics/users/jjohn1/Software/gwas2vcf/main.py \
         --out {path}/{out_preefix}.vcf \
         --data {path}/{out_preefix}.tsv \
