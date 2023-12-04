@@ -25,9 +25,9 @@ bcftools merge \
 tabix -p vcf dbscan_clust_2_15_GenomicPCA_covariates_Disease_Phenotype.vcf.gz 
 
 bcftools view --types snps dbscan_clust_2_15_GenomicPCA_covariates_Disease_Phenotype.vcf.gz | \
-       bgzip -c >dbscan_clust_2_15_GenomicPCA_Correlation_Disease_Phenotype_SNPOnly.vcf.gz
+       bgzip -c >dbscan_clust_2_15_GenomicPCA_covariates_Disease_Phenotype_SNPOnly.vcf.gz
 
-tabix -p vcf dbscan_clust_2_15_GenomicPCA_Correlation_Disease_Phenotype_SNPOnly.vcf.gz
+tabix -p vcf dbscan_clust_2_15_GenomicPCA_covariates_Disease_Phenotype_SNPOnly.vcf.gz
 
 
 
