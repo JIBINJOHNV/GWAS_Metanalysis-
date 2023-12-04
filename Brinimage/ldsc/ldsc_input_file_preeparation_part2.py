@@ -1,10 +1,11 @@
 import pandas as pd
 import os,subprocess
 
-gpcatype="CORR"
+gpcatype="CORR" # COV
+gpcatyp2="covariates" # Correlation
 vcf_location="/edgehpc/dept/human_genetics/users/jjohn1/Outcome_GWAS/All_GPCA_MetaSumstat/"
-input_file="dbscan_clust_1_15_GenomicPCA_Correlation_Disease_Phenotype_SNPOnly.vcf.gz"
-output_prefix="dbscan_clust_1_15_GenomicPCA_Correlation_Disease_Phenotype_SNPOnly"
+input_file=f"dbscan_clust_1_15_GenomicPCA_{gpcatyp2}_Disease_Phenotype_SNPOnly.vcf.gz"
+output_prefix=f"dbscan_clust_1_15_GenomicPCA_{gpcatyp2}_Disease_Phenotype_SNPOnly"
 
 
 
