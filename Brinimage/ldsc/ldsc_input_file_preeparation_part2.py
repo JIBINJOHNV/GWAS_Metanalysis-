@@ -1,20 +1,18 @@
 import pandas as pd
 import os,subprocess
+import numpy as np
 
-gpcatype="CORR" # COV
-gpcatyp2="covariates" # Correlation
+gpcatype="CORR" # "COV" "CORR"
+gpcatyp2="Correlation"     #"covariates" "Correlation"
 vcf_location="/edgehpc/dept/human_genetics/users/jjohn1/Outcome_GWAS/All_GPCA_MetaSumstat/"
 input_file=f"dbscan_clust_1_15_GenomicPCA_{gpcatyp2}_Disease_Phenotype_SNPOnly.vcf.gz"
 output_prefix=f"dbscan_clust_1_15_GenomicPCA_{gpcatyp2}_Disease_Phenotype_SNPOnly"
-
-
 
 os.system(f'''zgrep -v ".:.:.:." {vcf_location}{input_file}  | bgzip -c > {output_prefix}_Nomissing.vcf.gz''')
 os.system(f'''tabix -f -p vcf {output_prefix}_Nomissing.vcf.gz''')
 
 
 command = ['bcftools', 'query', '-l', f'{output_prefix}_Nomissing.vcf.gz']
-# Run the command and capture its output
 sumstats_files = subprocess.run(command, capture_output=True, text=True)
 sumstats_files=sumstats_files.stdout.split("\n")
 sumstats_files=[x for x in sumstats_files if x!=""]
@@ -24,8 +22,8 @@ for sample in sumstats_files:
     os.system(f'''tabix -p vcf {sample}.vcf.gz''')
     os.system(f'''gatk VariantsToTable  \
                 -V {sample}.vcf.gz \
-                -F CHROM -F POS -F ID -F REF -F ALT -GF AF -GF ES -GF SE -GF LP -GF SS -GF SI -GF NC \
-                -O {sample}.tsv''')
+                -F CHROM -F POS -F ID -F REF -F ALT -GF ES -GF SE -GF LP -GF SS -GF NC -GF AF -GF SI \
+                -O {sample}.tsv''') # -GF AF, -GF SI
 
 
 sumstat_types={f'Cluster_1_GPCA_{gpcatype}':"quant", f'Cluster_2_GPCA_{gpcatype}':"quant", 
@@ -48,6 +46,10 @@ for sample in sumstat_types.keys():
     df.columns=[x.replace(f'{sample}.',"") for x in df.columns ]
     df["P"]=10**(-df["LP"])
     df['Z']=df['ES']/df['SE']
+    
+    ## Adding dummy values to for Allle frequency and INFo score
+    df['AF']=np.where(df['AF'].isna(),0.1,df['AF'])
+    df['SI']=np.where(df['SI'].isna(),0.9,df['SI'])
     
     if sumstat_types[sample]=="binary":
         v=df['NC']/(df['NC']+df['SS'])
