@@ -85,10 +85,13 @@ hdl.covstruct <- hdl(traits,
                      LD.path="/edgehpc/dept/human_genetics/users/jjohn1/Software/UKB_imputed_hapmap2_SVD_eigen99_extraction/", method = "jackknife")
 
 
+save(hdl.covstruct, file="hdl_covstruct.RData")
 
 hdl.covstruct.2 <- hdl(traits,
                      sample.prev = datadf$sampleprevalence,
                      population.prev = datadf$populationprevalence ,
                      trait.names=trait.names,
                      LD.path="/edgehpc/dept/human_genetics/users/jjohn1/Software/UKB_imputed_hapmap2_SVD_eigen99_extraction/", method = "piecewise")
+
+save(hdl.covstruct.2, file="hdl_covstruct2.RData")
 
