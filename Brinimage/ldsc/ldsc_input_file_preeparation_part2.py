@@ -5,8 +5,8 @@ import numpy as np
 gpcatype="CORR" # "COV" "CORR"
 gpcatyp2="Correlation"     #"covariates" "Correlation"
 vcf_location="/edgehpc/dept/human_genetics/users/jjohn1/Outcome_GWAS/All_GPCA_MetaSumstat/"
-input_file=f"dbscan_clust_1_15_GenomicPCA_{gpcatyp2}_Disease_Phenotype_SNPOnly.vcf.gz"
-output_prefix=f"dbscan_clust_1_15_GenomicPCA_{gpcatyp2}_Disease_Phenotype_SNPOnly"
+input_file=f"dbscan_clust_1_15_GenomicPCA_{gpcatyp2}_Disease_Phenotype_IDP_SNPOnly.vcf.gz"
+output_prefix=f"dbscan_clust_1_15_GenomicPCA_{gpcatyp2}_Disease_Phenotype_IDP_SNPOnly"
 
 os.system(f'''zgrep -v ".:.:.:." {vcf_location}{input_file}  | bgzip -c > {output_prefix}_Nomissing.vcf.gz''')
 os.system(f'''tabix -f -p vcf {output_prefix}_Nomissing.vcf.gz''')
