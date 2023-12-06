@@ -35,6 +35,7 @@ info["CHR"]=info["CHR"].astype("str")
 info=info[["CHR",'rsid',"BP","EA","OA","info",'EAF']]
 
 
+
 for filename in filenames:
     print(f"{filename} started running")
     out_prefix=f'IDP_{filename[:-7]}'
@@ -51,7 +52,7 @@ for filename in filenames:
     fdf3=fdf3.rename(columns={"rsid":"SNPID","P":"PVAL"})
     fdf3[['EAF', 'BETA','SE','PVAL']]=fdf3[['EAF', 'BETA','SE','PVAL']].astype("float")
     fdf3=fdf3[['CHR','BP','SNPID','EA','OA','BETA','SE','N_eff','PVAL','EAF','info']]
-
+    
     ## Conveert the -log10 p value to P value
     if fdf[fdf["P"]>1].shape[0]>1:
         fdf["P"]=np.power(10,-fdf["P"])
@@ -73,10 +74,9 @@ for filename in filenames:
         "header": "true",
         "build": "GRCh37"
         }
-
     with open(f'{out_prefix}_params.txt', 'w') as f:
         json.dump(paramsdict, f)
-
+    
     ##Convert to vcf format 
     path=os.getcwd()
     print(f"{filename} started vcf cration")
