@@ -54,8 +54,8 @@ for filename in filenames:
     fdf3=fdf3[['CHR','BP','SNPID','EA','OA','BETA','SE','N_eff','PVAL','EAF','info']]
     
     ## Conveert the -log10 p value to P value
-    if fdf[fdf["P"]>1].shape[0]>1:
-        fdf["P"]=np.power(10,-fdf["P"])
+    if fdf3[fdf3["P"]>1].shape[0]>1:
+        fdf3["P"]=np.power(10,-fdf3["P"])
     
     fdf3.to_csv(f'{out_prefix}.tsv',sep="\t",index=None)
     
