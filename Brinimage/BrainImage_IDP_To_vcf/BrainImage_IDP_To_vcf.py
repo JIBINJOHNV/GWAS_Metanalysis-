@@ -35,8 +35,6 @@ info["CHR"]=info["CHR"].astype("str")
 info=info[["CHR",'rsid',"BP","EA","OA","info",'EAF']]
 
 
-filename=filenames[0]
-
 for filename in filenames:
     print(f"{filename} started running")
     out_prefix=f'IDP_{filename[:-7]}'
