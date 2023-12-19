@@ -42,7 +42,6 @@ ID=ID.replace("dbscan_clust","Cluster").replace("GenomicPCA_Correlation","GPCA_C
 ID=ID.replace("dbscan_clust","Cluster").replace("GenomicPCA_covariates","GPCA_COV")
 fdf=pd.read_csv(filename,sep="\t")
 fdf=fdf[['CHR','BP','SNPID','OA','EA','BETA','SE','N_eff','PVAL','EAF']]
-fdf=fdf[['CHR','BP','SNPID','EA','OA','BETA','SE','N_eff','PVAL','EAF']]
 fdf3=fdf[~fdf["CHR"].isna()]
 fdf3["CHR"]=fdf3["CHR"].astype("int").astype("str")
 fdf3[['BP','N_eff']]=fdf3[['BP','N_eff']].astype("int")
