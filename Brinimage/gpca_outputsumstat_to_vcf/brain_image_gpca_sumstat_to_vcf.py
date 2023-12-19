@@ -28,11 +28,13 @@ info=pd.read_csv("variants.txt.gz",sep="\s")
 info["chr1"]=info["chr"].str.replace("^0","",regex=True)
 info.drop("chr",inplace=True,axis=1)
 info=info.rename(columns={"chr1":"chr"})
-info['SNPID']=info["chr"]+"_"+info["pos"].astype("str")+"_"+info["a2"]+"_"+info["a1"]
 info.columns=['rsid','BP','OA','EA','EAF','info', 'CHR','SNPID']
 info["BP"]=info["BP"].astype("int")
 info["CHR"]=info["CHR"].astype("str")
 info=info[["CHR","BP","EA","OA","SNPID","info"]]
+info['SNPID']=info["CHR"]+"_"+info["BP"].astype("str")+"_"+info["OA"]+"_"+info["EA"]
+
+
 
 
 print(f"{filename} started running")
