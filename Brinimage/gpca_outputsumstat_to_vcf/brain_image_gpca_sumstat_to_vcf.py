@@ -31,7 +31,7 @@ info=info.rename(columns={"chr1":"chr"})
 info.columns=['rsid','BP','OA','EA','EAF','info', 'CHR']
 info["BP"]=info["BP"].astype("int")
 info["CHR"]=info["CHR"].astype("str")
-info=info[["CHR","BP","EA","OA","SNPID","info"]]
+info=info[["CHR","BP","EA","OA","info"]]
 info['SNPID']=info["CHR"]+"_"+info["BP"].astype("str")+"_"+info["OA"]+"_"+info["EA"]
 
 
