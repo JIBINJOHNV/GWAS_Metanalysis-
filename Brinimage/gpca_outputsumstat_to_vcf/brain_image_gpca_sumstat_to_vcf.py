@@ -29,7 +29,7 @@ info["chr1"]=info["chr"].str.replace("^0","",regex=True)
 info.drop("chr",inplace=True,axis=1)
 info=info.rename(columns={"chr1":"chr"})
 info['SNPID']=info["chr"]+"_"+info["pos"].astype("str")+"_"+info["a1"]+"_"+info["a2"]
-info.columns=['rsid','BP','EA', 'OA', 'EAF','info', 'CHR','SNPID']
+info.columns=['rsid','BP','OA','EA','EAF','info', 'CHR','SNPID']
 info["BP"]=info["BP"].astype("int")
 info["CHR"]=info["CHR"].astype("str")
 info=info[["CHR","BP","EA","OA","SNPID","info"]]
@@ -41,7 +41,7 @@ ID=out_preefix.replace(".N_weighted_GWAMA.results","")
 ID=ID.replace("dbscan_clust","Cluster").replace("GenomicPCA_Correlation","GPCA_CORR")
 ID=ID.replace("dbscan_clust","Cluster").replace("GenomicPCA_covariates","GPCA_COV")
 fdf=pd.read_csv(filename,sep="\t")
-fdf=fdf[['CHR','BP','SNPID','EA','OA','BETA','SE','N_eff','PVAL','EAF']]
+fdf=fdf[['CHR','BP','SNPID','OA','EA','BETA','SE','N_eff','PVAL','EAF']]
 fdf3=fdf[~fdf["CHR"].isna()]
 fdf3["CHR"]=fdf3["CHR"].astype("int").astype("str")
 fdf3[['BP','N_eff']]=fdf3[['BP','N_eff']].astype("int")
