@@ -29,7 +29,7 @@ info=pd.read_csv("variants.txt.gz",sep="\s")
 info["chr1"]=info["chr"].str.replace("^0","",regex=True)
 info.drop("chr",inplace=True,axis=1)
 info=info.rename(columns={"chr1":"chr"})
-info.columns=['rsid','BP','EA', 'OA', 'EAF','info', 'CHR']
+info.columns=['rsid','BP','OA', 'EA', 'EAF','info', 'CHR']
 info["BP"]=info["BP"].astype("int")
 info["CHR"]=info["CHR"].astype("str")
 info=info[["CHR",'rsid',"BP","EA","OA","info",'EAF']]
@@ -45,7 +45,7 @@ for filename in filenames:
     fdf['chr']=np.where(fdf['chr1'].isna(),fdf['chr'],fdf['chr1'])
     fdf['N_eff']=33000
     fdf=fdf.drop('chr1',axis=1)
-    fdf=fdf.rename(columns={"chr":"CHR","pos":"BP","a1":"EA","a2":"OA","beta":"BETA","se":"SE",'pval(-log10)':"P"})
+    fdf=fdf.rename(columns={"chr":"CHR","pos":"BP","a1":"OA","a2":"EA","beta":"BETA","se":"SE",'pval(-log10)':"P"})
     fdf["CHR"]=fdf["CHR"].astype("str")
     fdf[['BP','N_eff']]=fdf[['BP','N_eff']].astype("int")
     fdf3=pd.merge(fdf,info,on=['CHR','BP','rsid','EA','OA'])
