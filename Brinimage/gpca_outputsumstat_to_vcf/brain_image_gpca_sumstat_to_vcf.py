@@ -28,7 +28,7 @@ info=pd.read_csv("variants.txt.gz",sep="\s")
 info["chr1"]=info["chr"].str.replace("^0","",regex=True)
 info.drop("chr",inplace=True,axis=1)
 info=info.rename(columns={"chr1":"chr"})
-info['SNPID']=info["chr"]+"_"+info["pos"].astype("str")+"_"+info["a1"]+"_"+info["a2"]
+info['SNPID']=info["chr"]+"_"+info["pos"].astype("str")+"_"+info["a2"]+"_"+info["a1"]
 info.columns=['rsid','BP','OA','EA','EAF','info', 'CHR','SNPID']
 info["BP"]=info["BP"].astype("int")
 info["CHR"]=info["CHR"].astype("str")
@@ -47,7 +47,7 @@ fdf3["CHR"]=fdf3["CHR"].astype("int").astype("str")
 fdf3[['BP','N_eff']]=fdf3[['BP','N_eff']].astype("int")
 fdf3[['EAF', 'BETA','SE','PVAL']]=fdf3[['EAF', 'BETA','SE','PVAL']].astype("float")
 fdf3["CHR"]=fdf3["CHR"].str.replace("23","X")
-fdf3['SNPID']=fdf3["CHR"]+"_"+fdf3["BP"].astype("str")+"_"+fdf3["OA"]+"_"+fdf3["EA"]
+fdf3['SNPID']=fdf3["CHR"]+"_"+fdf3["BP"].astype("str")+"_"+fdf3["EA"]+"_"+fdf3["OA"]
 fdf3=pd.merge(fdf3,info,on=['CHR', 'BP', 'EA', 'OA', 'SNPID'])
 fdf3.to_csv(f'{out_preefix}.tsv',sep="\t",index=None)
 
