@@ -22,7 +22,7 @@ tempfile.tempdir = new_temp_dir
 print(tempfile.gettempdir())
 
 #filenames=glob.glob("*Correlation.N_weighted_GWAMA.results.txt.gz")
-filenames=glob.glob("*covariates.N_weighted_GWAMA.results.txt.gz")
+#filenames=glob.glob("*covariates.N_weighted_GWAMA.results.txt.gz")
 
 info=pd.read_csv("variants.txt.gz",sep="\s")
 info["chr1"]=info["chr"].str.replace("^0","",regex=True)
