@@ -47,7 +47,7 @@ fdf3["CHR"]=fdf3["CHR"].astype("int").astype("str")
 fdf3[['BP','N_eff']]=fdf3[['BP','N_eff']].astype("int")
 fdf3[['EAF', 'BETA','SE','PVAL']]=fdf3[['EAF', 'BETA','SE','PVAL']].astype("float")
 fdf3["CHR"]=fdf3["CHR"].str.replace("23","X")
-fdf3['SNPID']=fdf3["CHR"]+"_"+fdf3["BP"].astype("str")+"_"+fdf3["EA"]+"_"+fdf3["OA"]
+fdf3['SNPID']=fdf3["CHR"]+"_"+fdf3["BP"].astype("str")+"_"+fdf3["OA"]+"_"+fdf3["EA"]
 fdf3=pd.merge(fdf3,info,on=['CHR', 'BP', 'EA', 'OA', 'SNPID'])
 fdf3.to_csv(f'{out_preefix}.tsv',sep="\t",index=None)
 
