@@ -26,6 +26,6 @@ INPUT_DIR="/edgehpc/dept/human_genetics/users/jjohn1/Outcome_GWAS/All_GPCA_MetaS
 INPUT_FILES=("CLuster2_10_SNPs_Correlation_METAANALYSIS_1.tbl" "CLuster2_10_SNPs_Covariates_METAANALYSIS_1.tbl") # Get the input file for the current array task 
 INPUT_FILE=${INPUT_FILES[${SLURM_ARRAY_TASK_ID}-1]} # Run your Python script with the selected input file 
 
-python ${PYTHON_SCRIPT} --inputsumstat ${INPUT_DIR}/${INPUT_FILE}
+python ${PYTHON_SCRIPT} --inputsumstat ${INPUT_FILE}
 
 
