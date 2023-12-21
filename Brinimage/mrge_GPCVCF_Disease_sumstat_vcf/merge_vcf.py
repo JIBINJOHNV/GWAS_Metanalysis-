@@ -22,7 +22,7 @@ tabix -p vcf dbscan_clust_1_15_GenomicPCA_Covar_Corr_MDDwoBP_BIP_pgc3_SCZ_PGC3_C
 ## Remove multi alleleic variants
 bcftools norm --multiallelics +any \
         dbscan_clust_1_15_GenomicPCA_Covar_Corr_MDDwoBP_BIP_pgc3_SCZ_PGC3_ClutMeta_SNPOnly.vcf.gz |bcftools view --max-alleles 2 \
-        bgzip -c > dbscan_clust_1_15_GenomicPCA_Covar_Corr_MDDwoBP_BIP_pgc3_SCZ_PGC3_ClutMeta_SNPOnly_NoMAV.vcf.gz
+        | bgzip -c > dbscan_clust_1_15_GenomicPCA_Covar_Corr_MDDwoBP_BIP_pgc3_SCZ_PGC3_ClutMeta_SNPOnly_NoMAV.vcf.gz
         
 
 
