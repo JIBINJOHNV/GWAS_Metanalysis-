@@ -2,7 +2,8 @@
 
 for file in $(cat GenomicPCA_CORR_COV_file.tsv | sed '1d'| cut -f1|tr "\n" " "); do
 
-files1=$(grep -v $file GenomicPCA_CORR_COV_file.tsv| sed '1d' | cut -f1 | sed 's/GPCA_//g' | sed 's/_munge_input.tsv/.sumstats.gz/g' | tr "\n" ",") 
+#files1=$(grep -v $file GenomicPCA_CORR_COV_file.tsv| sed '1d' | cut -f1 | sed 's/GPCA_//g' | sed 's/_munge_input.tsv/.sumstats.gz/g' | tr "\n" ",") 
+files1=$(grep -v $file GenomicPCA_CORR_COV_file.tsv| sed '1d' | cut -f1 | sed 's/GPCA_//g' | sed 's/_munge_input.tsv/.sumstats.gz/g' | sed 's/Correlation/CORR/g' | sed 's/Covariates/COV/g' |tr "\n" ",")
 fil0=$(echo $file | sed 's/GPCA_//g' | sed 's/_munge_input.tsv/.sumstats.gz/g')
 files="${fil0},${files1}"
 files="${files::-1}"
